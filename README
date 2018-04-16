@@ -1,13 +1,6 @@
 # Installation on brand new Centos machine.
-# Based on post found on https://www.vultr.com/docs/how-to-install-hadoop-in-stand-alone-mode-on-centos-7
 
-
-cd /vagrant
-yum install wget
-wget http://www-us.apache.org/dist/hadoop/common/hadoop-3.0.1/hadoop-3.0.1.tar.gz 
-wget http://www-us.apache.org/dist/hadoop/common/hadoop-3.0.1/hadoop-3.0.1.tar.gz.mds
-
-# Run md5sum against the downloaded file
-tar -zxvf hadoop-3.0.1.tar.gz -C /opt
-
+- Distro and hadoop installation is handled via bootstrap.sh script for Vagrant.
+- See https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html for details for single node setup.
+- Various .xml should be copied to <hadoop home>/etc/hadoop/ directory
 
