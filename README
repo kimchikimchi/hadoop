@@ -4,3 +4,4 @@
 - See https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html for details for single node setup.
 - Various .xml should be copied to <hadoop home>/etc/hadoop/ directory
 
+

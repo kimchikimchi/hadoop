@@ -53,7 +53,6 @@
 # The java implementation to use. By default, this environment
 # variable is REQUIRED on ALL platforms except OS X!
 # export JAVA_HOME=
-export JAVA_HOME=`/usr/libexec/java_home`
 
 # Location of Hadoop.  By default, Hadoop will attempt to determine
 # this location based upon its execution path.

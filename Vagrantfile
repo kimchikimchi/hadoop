@@ -14,8 +14,8 @@ Vagrant.configure("2") do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.define "hadoop"
   config.vm.hostname = "hadoop"
-  config.vm.box = "centos/7"
-
+  config.vm.box = "bento/centos-7.4"
+  
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -139,6 +139,16 @@ Vagrant.configure("2") do |config|
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
   # end
+
+  config.vm.provider "virtualbox" do |vb|
+     # Display the VirtualBox GUI when booting the machine
+     # vb.gui = true
+  
+    # Customize the amount of memory on the VM:
+    vb.memory = "4096"
+    vb.cpus = "2"
+  end
+
   #
   # View the documentation for the provider you are using for more
   # information on available options.

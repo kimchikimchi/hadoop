@@ -13,7 +13,7 @@ yum update -y
 #shutdown -r now
 
 # As of Apr 2018, none of Hadoop versions worth with Java 9.
-yum install -y vim wget java-1.8.0-openjdk java-1.8.0-openjdk-devel
+yum install -y vim wget telnet net-tools java-1.8.0-openjdk java-1.8.0-openjdk-devel
 
 # Add items to install for Hdaoop 
 cd /vagrant
@@ -22,8 +22,13 @@ wget --quiet http://www-us.apache.org/dist/hadoop/common/hadoop-${VERSION}/hadoo
 
 tar -zxvf hadoop-${VERSION}.tar.gz -C $INSTALL_DIR
 
-echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' \
-| tee -a ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh
+#echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' \
+#| tee -a ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh
+
+cat << EOF | tee -a ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh
+export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+export HADOOP_PREFIX=${INSTALL_DIR}/hadoop
+EOF
 
 ln -s ./hadoop-${VERSION} ${INSTALL_DIR}/hadoop
 echo "export PATH=/opt/hadoop/bin:$PATH" | tee -a /etc/profile
@@ -46,6 +51,7 @@ fi
 chown -R vagrant:vagrant ${VAGRANT_HOME}/.ssh
 
 # Add portion to create $HADOOP_HOME/logs and be writable by vagrant user
-mkdir ${HADOOP_HOME}/logs && chown root:vagrant ${HADOOP_HOME}/logs && chmod g+w ${HADOOP_HOME}/logs
-
+if [ ! -d "${HADOOP_HOME}/logs" ]; then
+  mkdir ${HADOOP_HOME}/logs && chown root:vagrant ${HADOOP_HOME}/logs && chmod g+w ${HADOOP_HOME}/logs
+fi 
 
